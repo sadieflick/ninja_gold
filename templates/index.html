@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Enter Title Here</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+        <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                var output = $("#hidden").html();
+                console.log("GOT HERE")
+                console.log("output: ", output)
+                $("#text_box").append(output);
+            });
+        </script>
+	</head>
+    
+    
+    <body>
+		<div id="wrapper">
+            <p>Your gold: </p>
+            <p id="gold_box">{{session["goldTotal"]}}</p>
+
+            <div id="building_block">
+
+                <div class="building" id="farm">
+                    <h2>Farm</h2>
+                    <p>(earns 10-20 gold</p>
+                    <form action="/process_money" method = "post" class="btn">
+                        <input type="hidden" name="gold" value="farm"/>
+                        <input type="submit" class="find_gold"/>
+                    </form>
+                </div>
+
+                <div class="building" id="cave">
+                    <h2>Cave</h2>
+                    <p>(earns 5-10 gold</p>
+                    <form action="/process_money" method = "post" class="btn">
+                        <input type="hidden" name="gold" value="cave"/>
+                        <input type="submit" class="find_gold"/>
+                    </form>
+                </div>
+
+                <div class="building" id="house">
+                    <h2>House</h2>
+                    <p>(earns 2-5 gold</p>
+                    <form action="/process_money" method = "post" class="btn">
+                        <input type="hidden" name="gold" value="house"/>
+                        <input type="submit" class="find_gold"/>
+                    </form>
+                </div>
+
+                <div class="building" id="casino">
+                    <h2>Casino</h2>
+                    <p>(earns/takes 0-50 gold)</p>
+                    <form action="/process_money" method="post" class = "btn">
+                        <input type="hidden" name="gold" value="casino"/>
+                        <input type="submit" class="find_gold"/>
+                    </form>
+                </div>
+
+                <div id = "output_box">
+                    <p id="activities">Activites:</p>
+                    <p id="hidden"></p>
+                    <div id="text_box">
+                        {{session["returnStr"]| safe}}
+                    </div>
+
+                </div>
+
+            </div><!--end builiding blocks -->
+            
+        </div><!--end of wrapper-->
+
+    </body>
+    
+</html>
